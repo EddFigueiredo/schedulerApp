@@ -424,7 +424,7 @@ module.exports = function (grunt) {
     },
 
     // Run some tasks in parallel to speed up the build process
-    concurrent: {
+    /*concurrent: {
       server: [
         'compass:server'
       ],
@@ -436,7 +436,7 @@ module.exports = function (grunt) {
         'imagemin',
         'svgmin'
       ]
-    },
+    },*/
 
     shell: {
       options: {
@@ -466,7 +466,7 @@ module.exports = function (grunt) {
     if (target === 'dist') {
       return grunt.task.run([
         'build',
-        'configureProxies',
+        'configureProxies:server',
         'php:dist',
         'connect:dist:keepalive'
       ]);
@@ -475,7 +475,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
-      'concurrent:server',
+      //'concurrent:server',
       'autoprefixer',
       'configureProxies',
       'php:server',
@@ -492,7 +492,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:server',
     'shell:phpTest',
-    'concurrent:test',
+    //'concurrent:test',
     'autoprefixer',
     'connect:test',
     'karma'
@@ -503,7 +503,7 @@ module.exports = function (grunt) {
     'shell:phpUpdate',
     'wiredep',
     'useminPrepare',
-    'concurrent:dist',
+    //'concurrent:dist',
     'autoprefixer',
     'concat',
     'ngmin',
