@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name schedulerAppApp
+ * @name schedularAppTestApp
  * @description
- * # schedulerAppApp
+ * # schedularAppTestApp
  *
  * Main module of the application.
  */
 angular
-  .module('schedulerAppApp', [
+  .module('schedularAppTestApp', [
     'ngRoute'
   ])
   .config(function ($routeProvider) {
