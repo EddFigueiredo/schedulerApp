@@ -13,17 +13,18 @@ install: vendor
 	# └─────────────────────────────┘
 
 vendor: composer.phar composer.json Makefile
-	[ -e composer.lock ] && php5 -d memory_limit=-1 composer.phar update || php5 -d memory_limit=-1 composer.phar install
+	[ -e composer.lock ] && php -d memory_limit=-1 composer.phar update || php -d memory_limit=-1 composer.phar install
 	touch vendor
 
 composer.phar:
-	curl -s http://getcomposer.org/installer | php5
+	#curl -s http://getcomposer.org/installer | php
+	php5 installer 
 	# ┌──────────────────────────────────────┐
 	# │ Downloaded Composer in composer.phar │
 	# └──────────────────────────────────────┘
 
 update: composer.phar composer.json Makefile
-	[ -e composer.lock ] && php5 -d memory_limit=-1 composer.phar update || php5 -d memory_limit=-1 composer.phar install
+	[ -e composer.lock ] && php -d memory_limit=-1 composer.phar update || php -d memory_limit=-1 composer.phar install
 	# ┌────────────────────────────────────────────┐
 	# │ Updated Composer dependencies successfully │
 	# └────────────────────────────────────────────┘
@@ -35,19 +36,19 @@ update: composer.phar composer.json Makefile
 
 test: install
 	make lint && \
-	vendor/bin/php5unit --coverage-html build/logs/coverage --coverage-text=build/logs/coverage.txt && \
+	vendor/bin/phpunit --coverage-html build/logs/coverage --coverage-text=build/logs/coverage.txt && \
 	echo && \
 	echo ======== Code coverage ======== && \
 	cat build/logs/coverage.txt | grep -A3 Summary | tail -n 3 && \
 	echo ===============================
 
 lint: install
-	vendor/bin/php5cs -p --standard=PSR1 config src tests index.php5 | tee /tmp/php5cs.log \
-	&& vendor/bin/php5cs -p --standard=PSR2 config src tests index.php5 | tee -a /tmp/php5cs.log \
-	&& echo " TOTAL   $$(grep ERROR /tmp/php5cs.log | wc -l) ERRORS" \
-	&& echo "         $$(grep WARNING /tmp/php5cs.log | wc -l) WARNINGS" \
+	vendor/bin/phpcs -p --standard=PSR1 config src tests index.php | tee /tmp/phpcs.log \
+	&& vendor/bin/phpcs -p --standard=PSR2 config src tests index.php | tee -a /tmp/phpcs.log \
+	&& echo " TOTAL   $$(grep ERROR /tmp/phpcs.log | wc -l) ERRORS" \
+	&& echo "         $$(grep WARNING /tmp/phpcs.log | wc -l) WARNINGS" \
 	&& echo \
-	&& rm /tmp/php5cs.log
+	&& rm /tmp/phpcs.log
 
 # ==============================================================================
 # Cleaning
