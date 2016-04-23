@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name schedularAppTestApp.controller:AboutCtrl
+ * @name schedulerApp.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the schedularAppTestApp
+ * Controller of the schedulerApp
  */
-angular.module('schedularAppTestApp')
+angular.module('schedulerApp')
   .controller('AboutCtrl', function ($scope, $http) {
 
     function createUnknownError(status) {
