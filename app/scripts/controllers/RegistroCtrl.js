@@ -8,7 +8,7 @@
  * Controller of the schedulerApp
  */
 angular.module('schedulerApp')
-  .controller('AboutCtrl', function ($scope, $http) {
+  .controller('RegistroCtrl', function ($scope, $http) {
 
     function createUnknownError(status) {
       return {

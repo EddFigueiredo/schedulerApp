@@ -18,9 +18,9 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .when('/registrar', {
+        templateUrl: 'views/registro.html',
+        controller: 'RegistroCtrl'
       })
       .otherwise({
         redirectTo: '/'
